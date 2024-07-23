@@ -45,12 +45,12 @@ class Pokemon {
     return Pokemon(
       id: map['id']?.toInt() ?? 0,
       name: map['name'] ?? '',
-      type: map['type'] ?? '',
-      imageLink: map['imageLink'] ?? '',
-      hp: map['hp']?.toInt() ?? 0,
-      attack: map['attack']?.toInt() ?? 0,
-      defense: map['defense']?.toInt() ?? 0,
-      speed: map['speed']?.toInt() ?? 0,
+      type: map['types'][0]['type']['name'] ?? '',
+      imageLink: map['sprites']['other']['dream_world']['front_default'] ?? '',
+      hp: map['stats'][0]['base_stat']?.toInt() ?? 0,
+      attack: map['stats'][1]['base_stat']?.toInt() ?? 0,
+      defense: map['stats'][2]['base_stat']?.toInt() ?? 0,
+      speed: map['stats'][5]['base_stat']?.toInt() ?? 0,
     );
   }
 
