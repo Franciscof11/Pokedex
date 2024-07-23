@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:pokedex/modules/pokedex/data/pokemon_repository.dart';
 import 'package:pokedex/modules/pokedex/domain/pokemon.dart';
 
 class PokedexRepository {
@@ -7,13 +8,21 @@ class PokedexRepository {
     try {
       final dio = Dio();
 
-      final response = await dio.get('https://pokeapi.co/api/v2/pokemon?limit=20');
+      final response = await dio.get('https://pokeapi.co/api/v2/pokemon?limit=10');
 
       final responseMap = response.data['results'];
 
-      final pokedex = responseMap.map<Pokemon>((pokemon) => Pokemon.fromMap(pokemon)).toList();
+      List<Pokemon> pokemons = [];
 
-      return pokedex;
+      for (var result in responseMap) {
+        final pokemonRepository = PokemonRepository();
+
+        final pokemonDetail = await pokemonRepository.getPokemon(result['name']);
+
+        pokemons.add(pokemonDetail);
+      }
+
+      return pokemons;
     } on DioException catch (e) {
       if (e.type == DioExceptionType.badResponse) {
         debugPrint('Server Error: ${e.response?.statusCode} - ${e.response?.statusMessage}');

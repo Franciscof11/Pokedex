@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:pokedex/modules/pokedex/domain/pokemon.dart';
 
 class PokemonRepository {
-  Future<Pokemon> getPokemon(int id) async {
+  Future<Pokemon> getPokemon(String name) async {
     try {
       final dio = Dio();
 
-      final response = await dio.get('https://pokeapi.co/api/v2/pokemon/$id/');
+      final response = await dio.get('https://pokeapi.co/api/v2/pokemon/$name/');
 
       final responseMap = response.data;
 

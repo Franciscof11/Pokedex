@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/modules/pokedex/data/pokedex_repository.dart';
-import 'package:pokedex/modules/pokedex/data/pokemon_repository.dart';
 
 void main() {
   runApp(const MainApp());
@@ -16,11 +15,13 @@ class MainApp extends StatelessWidget {
         body: Center(
           child: GestureDetector(
             onTap: () async {
-              final repository = PokemonRepository();
+              final repository = PokedexRepository();
 
-              final pokemon = await repository.getPokemon(1);
+              final pokedex = await repository.getPokedex();
 
-              print(pokemon.toString());
+              for (var pokemon in pokedex) {
+                print(pokemon.toString());
+              }
             },
             child: const Text('Hello World!'),
           ),
