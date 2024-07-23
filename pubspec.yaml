@@ -7,9 +7,12 @@ environment:
   sdk: '>=3.4.3 <4.0.0'
 
 dependencies:
+  cached_network_image: ^3.3.1
   dio: ^5.5.0+1
   flutter:
     sdk: flutter
+  flutter_svg: ^2.0.10+1
+  http: ^1.2.2
   percent_indicator: ^4.2.3
 
 dev_dependencies:
