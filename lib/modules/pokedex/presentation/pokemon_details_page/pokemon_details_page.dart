@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/modules/pokedex/data/pokemon_repository.dart';
 
@@ -47,7 +46,7 @@ class PokemonDetailsPageState extends State<PokemonDetailsPage> {
                   style: const TextStyle(color: Colors.amber, fontSize: 20),
                 ),
                 const SizedBox(height: 30),
-                CachedNetworkSvg(url: pokemon.imageLink),
+                CachedNetworkSvg(urlImage: pokemon.imageLink),
                 /*             CachedNetworkImage(
                   imageUrl: pokemon.imageLink,
                   

@@ -1,6 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:pokedex/modules/pokedex/data/pokedex_repository.dart';
 import 'package:pokedex/modules/pokedex/domain/pokemon.dart';
 import 'package:pokedex/modules/pokedex/presentation/pokemon_details_page/pokemon_details_page.dart';
@@ -54,7 +52,7 @@ class PokemonFeedState extends State<PokemonFeed> {
                     width: 80,
                     height: 50,
                     child: CachedNetworkSvg(
-                      url: pokemon.imageLink,
+                      urlImage: pokemon.imageLink,
                     ),
                   ),
                   title: Text(pokemon.name),
