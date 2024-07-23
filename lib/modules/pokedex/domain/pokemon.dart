@@ -54,6 +54,19 @@ class Pokemon {
     );
   }
 
+  factory Pokemon.empty() {
+    return Pokemon(
+      id: 0,
+      name: '',
+      type: '',
+      imageLink: '',
+      hp: 0,
+      attack: 0,
+      defense: 0,
+      speed: 0,
+    );
+  }
+
   @override
   String toString() {
     return 'Pokemon(id: $id, name: $name, type: $type, imageLink: $imageLink, hp: $hp, attack: $attack, defense: $defense, speed: $speed)';
