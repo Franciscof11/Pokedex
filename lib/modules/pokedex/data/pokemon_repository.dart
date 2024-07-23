@@ -11,7 +11,7 @@ class PokemonRepository {
 
       final responseMap = response.data;
 
-      final pokemon = responseMap.map<Pokemon>((pokemon) => Pokemon.fromMap(pokemon));
+      final pokemon = Pokemon.fromMap(responseMap);
 
       return pokemon;
     } on DioException catch (e) {
