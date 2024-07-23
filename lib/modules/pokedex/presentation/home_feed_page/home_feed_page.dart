@@ -5,14 +5,14 @@ import 'package:pokedex/modules/pokedex/presentation/pokemon_details_page/pokemo
 
 import '../../../../utils/cached_network_svg.dart';
 
-class PokemonFeed extends StatefulWidget {
-  const PokemonFeed({super.key});
+class HomeFeedPage extends StatefulWidget {
+  const HomeFeedPage({super.key});
 
   @override
-  PokemonFeedState createState() => PokemonFeedState();
+  HomeFeedPageState createState() => HomeFeedPageState();
 }
 
-class PokemonFeedState extends State<PokemonFeed> {
+class HomeFeedPageState extends State<HomeFeedPage> {
   final pokedexRepository = PokedexRepository();
   late Future<List<Pokemon>> futurePokemons;
 

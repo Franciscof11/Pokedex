@@ -5,8 +5,8 @@ import '../../../../utils/cached_network_svg.dart';
 import '../../domain/pokemon.dart';
 
 class PokemonDetailsPage extends StatefulWidget {
-  final Pokemon pokemon;
-  const PokemonDetailsPage({super.key, required this.pokemon});
+  final Pokemon? pokemon;
+  const PokemonDetailsPage({super.key, this.pokemon});
 
   @override
   PokemonDetailsPageState createState() => PokemonDetailsPageState();
@@ -19,7 +19,7 @@ class PokemonDetailsPageState extends State<PokemonDetailsPage> {
   @override
   void initState() {
     super.initState();
-    futurePokemon = pokemonRepository.getPokemon(widget.pokemon.name);
+    futurePokemon = pokemonRepository.getPokemon(widget.pokemon?.name ?? '');
   }
 
   @override

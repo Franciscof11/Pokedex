@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/modules/pokedex/presentation/home_feed_page/home_feed_page.dart';
+import 'package:pokedex/utils/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,11 +11,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Pokémon Feed',
+      title: 'Pokedex',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const PokemonFeed(),
+      routes: AppRoutes.routes,
+      initialRoute: AppRoutes.homeFeedPage,
     );
   }
 }
