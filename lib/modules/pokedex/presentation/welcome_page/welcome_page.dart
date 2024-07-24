@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:pokedex/modules/pokedex/presentation/home_feed_page/home_feed_page.dart';
 import 'package:pokedex/utils/app_colors.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -71,7 +73,15 @@ class _WelcomePageState extends State<WelcomePage> {
               ],
             ),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  PageTransition(
+                    child: const HomeFeedPage(),
+                    type: PageTransitionType.rightToLeft,
+                  ),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primaryRed,
                 fixedSize: const Size(250, 55),
