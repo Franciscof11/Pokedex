@@ -47,13 +47,6 @@ class PokemonDetailsPageState extends State<PokemonDetailsPage> {
                 ),
                 const SizedBox(height: 30),
                 CachedNetworkSvg(urlImage: pokemon.imageLink),
-                /*             CachedNetworkImage(
-                  imageUrl: pokemon.imageLink,
-                  
-                  placeholder: (context, url) => const CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                  width: 400,
-                ), */
               ],
             );
           }

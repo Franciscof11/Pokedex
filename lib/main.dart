@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/utils/routes.dart';
+import 'modules/pokedex/presentation/home_feed_page/home_feed_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,8 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      routes: AppRoutes.routes,
-      initialRoute: AppRoutes.homeFeedPage,
+      home: const HomeFeedPage(),
     );
   }
 }
