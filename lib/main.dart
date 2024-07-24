@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'modules/pokedex/presentation/home_feed_page/home_feed_page.dart';
+import 'modules/pokedex/presentation/welcome_page/welcome_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomeFeedPage(),
+      home: const WelcomePage(),
     );
   }
 }
