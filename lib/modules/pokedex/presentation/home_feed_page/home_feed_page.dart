@@ -78,9 +78,15 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
                     const SizedBox(height: 15),
                     Expanded(
                       child: GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 8,
+                          crossAxisSpacing: 8,
+                          childAspectRatio: 3 / 2,
+                        ),
                         shrinkWrap: true,
-                        itemCount: 5,
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: 20,
                         itemBuilder: (context, index) => PokemonListTile(
                           pokemon: Pokemon(
                             id: 1,

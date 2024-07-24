@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pokedex/utils/app_colors.dart';
 
 class CachedNetworkSvg extends StatelessWidget {
   final String urlImage;
@@ -18,11 +19,14 @@ class CachedNetworkSvg extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(color: AppColors.primaryRed),
           );
         } else if (snapshot.hasError) {
           return const Center(
-            child: Icon(Icons.error),
+            child: Icon(
+              Icons.error,
+              color: Colors.red,
+            ),
           );
         } else if (snapshot.hasData) {
           return SvgPicture.string(

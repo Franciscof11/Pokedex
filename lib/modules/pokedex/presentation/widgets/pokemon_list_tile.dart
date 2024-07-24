@@ -11,63 +11,73 @@ class PokemonListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: AppColors.whiteIce,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      elevation: 8,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Row(
         children: [
           Expanded(
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                Text(
-                  pokemon.name,
-                  style: GoogleFonts.nunito(
-                    color: AppColors.primaryBlue,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 20,
-                  ),
-                ),
-                const SizedBox(height: 3),
-                Container(
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.blue,
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 7,
-                        spreadRadius: 0.5,
-                      ),
-                    ],
-                  ),
-                  child: Text(
-                    pokemon.type,
-                    style: GoogleFonts.montserrat(
-                      fontSize: 13,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 10),
+                  Text(
+                    pokemon.name,
+                    style: GoogleFonts.nunito(
+                      color: AppColors.primaryBlue,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20,
                     ),
                   ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  '#${pokemon.id}',
-                  style: GoogleFonts.nunito(
-                    color: AppColors.primaryBlue,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
+                  const SizedBox(height: 6),
+                  Container(
+                    width: 55,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: Colors.blue,
+                    ),
+                    child: Text(
+                      pokemon.type,
+                      style: GoogleFonts.nunito(
+                        color: AppColors.primaryBlue,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 10),
+                  Text(
+                    '#${pokemon.id}',
+                    style: GoogleFonts.nunito(
+                      color: AppColors.primaryBlue,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           Expanded(
-            child: CachedNetworkSvg(urlImage: pokemon.imageLink),
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: SizedBox(
+                    child: Image.asset(
+                      'assets/background_tile.png',
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: CachedNetworkSvg(urlImage: pokemon.imageLink),
+                ),
+              ],
+            ),
           ),
         ],
       ),
