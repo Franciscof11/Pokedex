@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/modules/pokedex/data/pokedex_repository.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pokedex/modules/pokedex/domain/pokemon.dart';
-import 'package:pokedex/modules/pokedex/presentation/pokemon_details_page/pokemon_details_page.dart';
 import 'package:pokedex/utils/app_colors.dart';
-
-import '../../../../utils/cached_network_svg.dart';
+import '../widgets/pokemon_list_tile.dart';
 import '../widgets/search_widget.dart';
+import '../widgets/type_list_widget.dart';
 
 class HomeFeedPage extends StatefulWidget {
   const HomeFeedPage({super.key});
@@ -50,78 +49,58 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
           ],
         ),
         backgroundColor: AppColors.whiteIce,
-        body: const SafeArea(
-            child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25),
-          child: Column(
-            children: [
-              SizedBox(height: 25),
-              SearchWidget(),
-            ],
-          ),
-        )),
-      ),
-    );
-  }
-}
-
-class HomeFeedPage2 extends StatefulWidget {
-  const HomeFeedPage2({super.key});
-
-  @override
-  HomeFeedPage2State createState() => HomeFeedPage2State();
-}
-
-class HomeFeedPage2State extends State<HomeFeedPage2> {
-  final pokedexRepository = PokedexRepository();
-  late Future<List<Pokemon>> futurePokemons;
-
-  @override
-  void initState() {
-    super.initState();
-    futurePokemons = pokedexRepository.getPokedex();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pokémon Feed'),
-      ),
-      body: FutureBuilder<List<Pokemon>>(
-        future: futurePokemons,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No Pokémon found'));
-          }
-
-          final pokemons = snapshot.data!;
-
-          return ListView.builder(
-            itemCount: pokemons.length,
-            itemBuilder: (context, index) {
-              final pokemon = pokemons[index];
-              return GestureDetector(
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => PokemonDetailsPage(pokemon: pokemon))),
-                child: ListTile(
-                  leading: SizedBox(
-                    width: 80,
-                    height: 50,
-                    child: CachedNetworkSvg(
-                      urlImage: pokemon.imageLink,
+        body: SafeArea(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 15),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25),
+              child: SearchWidget(),
+            ),
+            const SizedBox(height: 25),
+            const TypeList(),
+            const SizedBox(height: 15),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Mais procurados",
+                      style: GoogleFonts.nunito(
+                        color: AppColors.primaryBlue,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 22,
+                      ),
                     ),
-                  ),
-                  title: Text(pokemon.name),
-                  subtitle: Text('ID: ${pokemon.id}\nTypes: ${pokemon.type}'),
+                    const SizedBox(height: 15),
+                    Expanded(
+                      child: GridView.builder(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                        shrinkWrap: true,
+                        itemCount: 5,
+                        itemBuilder: (context, index) => PokemonListTile(
+                          pokemon: Pokemon(
+                            id: 1,
+                            name: 'Teste',
+                            attack: 1,
+                            defense: 2,
+                            hp: 4,
+                            imageLink: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg',
+                            speed: 4,
+                            type: 'grama',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              );
-            },
-          );
-        },
+              ),
+            ),
+          ],
+        )),
       ),
     );
   }
