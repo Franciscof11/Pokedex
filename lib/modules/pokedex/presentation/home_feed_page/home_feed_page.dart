@@ -21,31 +21,6 @@ class HomeFeedPage extends StatefulWidget {
 }
 
 class _HomeFeedPageState extends State<HomeFeedPage> {
-  bool _isVisible = true;
-  final ScrollController _scrollController = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController.addListener(_scrollListener);
-  }
-
-  void _scrollListener() {
-    if (_scrollController.position.userScrollDirection == ScrollDirection.reverse) {
-      if (_isVisible) {
-        setState(() {
-          _isVisible = false;
-        });
-      }
-    } else if (_scrollController.position.userScrollDirection == ScrollDirection.forward) {
-      if (!_isVisible) {
-        setState(() {
-          _isVisible = true;
-        });
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -134,7 +109,6 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
                                 context.read<PokedexCubit>().getPokedex();
                               },
                               child: GridView.builder(
-                                controller: _scrollController,
                                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
                                   mainAxisSpacing: 8,
@@ -170,43 +144,37 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
               ),
             ],
           ),
-          bottomNavigationBar: AnimatedOpacity(
-            opacity: _isVisible ? 1.0 : 0.0,
-            duration: const Duration(milliseconds: 300),
-            child: _isVisible
-                ? BottomNavigationBar(
-                    selectedLabelStyle: GoogleFonts.nunito(
-                      color: AppColors.primaryBlue,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 15,
-                    ),
-                    unselectedLabelStyle: GoogleFonts.nunito(
-                      color: AppColors.primaryBlue,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
-                    ),
-                    items: const [
-                      BottomNavigationBarItem(
-                        icon: Icon(
-                          Icons.home_rounded,
-                          color: AppColors.primaryBlue,
-                        ),
-                        label: 'Home',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.favorite_outline),
-                        label: 'Favoritos',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.person_outline),
-                        label: 'Minha conta',
-                      ),
-                    ],
+          bottomNavigationBar: BottomNavigationBar(
+            selectedLabelStyle: GoogleFonts.nunito(
+              color: AppColors.primaryBlue,
+              fontWeight: FontWeight.w600,
+              fontSize: 15,
+            ),
+            unselectedLabelStyle: GoogleFonts.nunito(
+              color: AppColors.primaryBlue,
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+            ),
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home_rounded,
+                  color: AppColors.primaryBlue,
+                ),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.favorite_outline),
+                label: 'Favoritos',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person_outline),
+                label: 'Minha conta',
+              ),
+            ],
 
-                    selectedItemColor: Colors.blue, // Change this to match your design
-                    unselectedItemColor: Colors.grey, // Change this to match your design
-                  )
-                : const SizedBox.shrink(),
+            selectedItemColor: Colors.blue, // Change this to match your design
+            unselectedItemColor: Colors.grey, // Change this to match your design
           ),
         ));
   }
