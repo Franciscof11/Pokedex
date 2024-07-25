@@ -78,8 +78,6 @@ class PokedexCubit extends Cubit<PokedexState> {
     try {
       emit(const PokedexState.loading());
 
-      /*     final pokedex = await _repository.getPokedex(); */
-
       List<Pokemon> filteredPokedex = pokedex;
       filter(String type) {
         filteredPokedex = pokedex.where((pokemon) {
@@ -103,10 +101,10 @@ class PokedexCubit extends Cubit<PokedexState> {
           filter("normal");
 
         case 5:
-          filter("air");
+          filter("ground");
 
         case 6:
-          filter("rock");
+          filter("bug");
       }
       print(filteredPokedex);
       emit(PokedexState.data(pokedex: filteredPokedex));

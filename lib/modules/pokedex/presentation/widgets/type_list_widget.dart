@@ -40,11 +40,11 @@ class TypeListState extends State<TypeList> {
       "id": 4,
     },
     {
-      "name": "Ar",
+      "name": "Terra",
       "id": 5,
     },
     {
-      "name": "Pedra",
+      "name": "Inseto",
       "id": 6,
     },
   ];
