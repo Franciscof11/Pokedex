@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pokedex/modules/pokedex/domain/pokemon.dart';
 import 'package:pokedex/modules/pokedex/presentation/home_feed_page/cubit/pokedex_cubit.dart';
+import 'package:pokedex/modules/pokedex/presentation/pokemon_details_page/cubit/pokemon_cubit.dart';
 import 'package:pokedex/modules/pokedex/presentation/pokemon_details_page/pokemon_details_page.dart';
 import 'package:pokedex/utils/app_colors.dart';
 import '../widgets/loader.dart';
@@ -19,17 +20,6 @@ class HomeFeedPage extends StatefulWidget {
 }
 
 class _HomeFeedPageState extends State<HomeFeedPage> {
-  final pokemon = Pokemon(
-    id: 1,
-    name: 'bulbasaur',
-    attack: 1,
-    defense: 2,
-    hp: 4,
-    imageLink: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg',
-    speed: 4,
-    type: 'grama',
-  );
-
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -106,7 +96,7 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
                     ),
                     BlocSelector<PokedexCubit, PokedexState, List<Pokemon>>(
                       selector: (state) => state.maybeWhen(
-                        data: (cars) => cars,
+                        data: (pokedex) => pokedex,
                         orElse: () => [],
                       ),
                       builder: (context, state) {
@@ -131,7 +121,10 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
                                 onTap: () => Navigator.push(
                                   context,
                                   PageTransition(
-                                    child: PokemonDetailsPage(pokemon: pokedex[index]),
+                                    child: BlocProvider(
+                                      create: (context) => PokemonCubit()..showPokemon(pokedex[index]),
+                                      child: PokemonDetailsPage(pokemon: pokedex[index]),
+                                    ),
                                     type: PageTransitionType.rightToLeft,
                                   ),
                                 ),

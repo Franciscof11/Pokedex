@@ -10,6 +10,7 @@ class PokemonListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pokemonName = '${pokemon.name[0].toUpperCase()}${pokemon.name.substring(1)}';
     return Card(
       elevation: 8,
       color: Colors.white,
@@ -24,7 +25,7 @@ class PokemonListTile extends StatelessWidget {
                 children: [
                   const SizedBox(height: 10),
                   Text(
-                    pokemon.name,
+                    pokemonName,
                     style: GoogleFonts.nunito(
                       color: AppColors.primaryBlue,
                       fontWeight: FontWeight.w700,
