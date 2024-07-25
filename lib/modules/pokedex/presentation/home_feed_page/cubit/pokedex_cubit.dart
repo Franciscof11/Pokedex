@@ -32,4 +32,22 @@ class PokedexCubit extends Cubit<PokedexState> {
       emit(const PokedexState.error(message: 'Error!'));
     }
   }
+
+  Future<void> searchPokemon(String pokemonName) async {
+    try {
+      emit(const PokedexState.loading());
+
+      final pokedex = await _repository.getPokedex();
+
+      final filteredPokemon = pokedex.where((pokemon) => pokemon.name.toLowerCase().contains(pokemonName.toLowerCase())).toList();
+
+      emit(PokedexState.data(pokedex: filteredPokemon));
+    } catch (e) {
+      log(
+        'Error!',
+        error: e,
+      );
+      emit(const PokedexState.error(message: 'Error!'));
+    }
+  }
 }

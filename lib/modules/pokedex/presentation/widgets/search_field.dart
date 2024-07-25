@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../home_feed_page/cubit/pokedex_cubit.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final pokemonNameController = TextEditingController();
     return Row(
       children: [
-        const Expanded(
+        Expanded(
           child: TextField(
-            decoration: InputDecoration(
+            onTapOutside: (event) => FocusScope.of(context).unfocus(),
+            controller: pokemonNameController,
+            decoration: const InputDecoration(
               fillColor: Colors.white,
               filled: true,
               border: OutlineInputBorder(
@@ -34,7 +40,10 @@ class SearchField extends StatelessWidget {
           child: IconButton(
             icon: const Icon(Icons.search),
             color: Colors.white,
-            onPressed: () {},
+            onPressed: () {
+              context.read<PokedexCubit>().searchPokemon(pokemonNameController.text);
+              FocusScope.of(context).unfocus();
+            },
           ),
         ),
       ],
