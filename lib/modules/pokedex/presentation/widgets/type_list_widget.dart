@@ -82,7 +82,7 @@ class TypeListState extends State<TypeList> {
                   onTap: () {
                     setBrandIndex(index);
 
-                    context.read<PokedexCubit>().filterByType(0);
+                    context.read<PokedexCubit>().getPokedex();
                   },
                   child: BrandItem(
                     imgAsset: 'Todos',
