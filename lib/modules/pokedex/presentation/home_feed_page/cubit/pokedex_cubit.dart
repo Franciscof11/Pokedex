@@ -50,4 +50,49 @@ class PokedexCubit extends Cubit<PokedexState> {
       emit(const PokedexState.error(message: 'Error!'));
     }
   }
+
+  Future<void> filterByType(int typeId) async {
+    try {
+      emit(const PokedexState.loading());
+
+      final pokedex = await _repository.getPokedex();
+
+      List<Pokemon> filteredPokedex = pokedex;
+      filter(String type) {
+        filteredPokedex = pokedex.where((pokemon) {
+          if (pokemon.type == type) return true;
+          return false;
+        }).toList();
+      }
+
+      switch (typeId) {
+        case 0:
+        case 1:
+          filter("water");
+
+        case 2:
+          filter("fire");
+
+        case 3:
+          filter("grass");
+
+        case 4:
+          filter("normal");
+
+        case 5:
+          filter("air");
+
+        case 6:
+          filter("rock");
+      }
+      print(filteredPokedex);
+      emit(PokedexState.data(pokedex: filteredPokedex));
+    } catch (e) {
+      log(
+        'Error!',
+        error: e,
+      );
+      emit(const PokedexState.error(message: 'Error!'));
+    }
+  }
 }

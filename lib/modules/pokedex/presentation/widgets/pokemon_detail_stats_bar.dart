@@ -23,7 +23,7 @@ class PokemonDetailStatsBar extends StatefulWidget {
 class _PokemonDetailStatsBarState extends State<PokemonDetailStatsBar> {
   @override
   Widget build(BuildContext context) {
-    final percent = widget.value / 100;
+    final percent = widget.value / 1000;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 22),
       child: Column(

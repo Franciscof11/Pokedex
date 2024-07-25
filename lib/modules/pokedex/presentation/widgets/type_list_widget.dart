@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pokedex/modules/pokedex/presentation/home_feed_page/cubit/pokedex_cubit.dart';
 
 import '../../../../utils/app_colors.dart';
 
@@ -13,39 +15,42 @@ class TypeList extends StatefulWidget {
 }
 
 class TypeListState extends State<TypeList> {
-  int _brandCategoryIndex = 0;
+  int _typeIndex = 0;
 
   var typeList = [
     {
-      "name": "Fogo",
-      "icon": "",
+      "name": "All",
       "id": 0,
     },
     {
       "name": "Água",
-      "icon": "assets/icons/chevrolet_icon.png",
       "id": 1,
     },
     {
-      "name": "Terra",
-      "icon": "assets/icons/volks_icon.png",
+      "name": "Fogo",
       "id": 2,
     },
     {
-      "name": "Ar",
-      "icon": "assets/icons/toyota_icon.png",
+      "name": "Grama",
       "id": 3,
     },
     {
+      "name": "Normal",
+      "id": 4,
+    },
+    {
+      "name": "Ar",
+      "id": 5,
+    },
+    {
       "name": "Pedra",
-      "icon": "assets/icons/toyota_icon.png",
-      "id": 3,
+      "id": 6,
     },
   ];
 
   void setBrandIndex(int currentIndex) {
     setState(() {
-      _brandCategoryIndex = currentIndex;
+      _typeIndex = currentIndex;
     });
   }
 
@@ -76,24 +81,26 @@ class TypeListState extends State<TypeList> {
                 return GestureDetector(
                   onTap: () {
                     setBrandIndex(index);
-                    debugPrint(typeList[index]["name"].toString());
+
+                    context.read<PokedexCubit>().filterByType(0);
                   },
                   child: BrandItem(
                     imgAsset: 'Todos',
                     index: 0,
-                    isSelected: (_brandCategoryIndex == index) ? true : false,
+                    isSelected: (_typeIndex == index) ? true : false,
                   ),
                 );
               } else {
                 return GestureDetector(
                   onTap: () {
                     setBrandIndex(index);
-                    debugPrint(typeList[index]["name"].toString());
+
+                    context.read<PokedexCubit>().filterByType(index);
                   },
                   child: BrandItem(
                     imgAsset: typeList[index]["name"].toString(),
                     index: index,
-                    isSelected: (_brandCategoryIndex == index) ? true : false,
+                    isSelected: (_typeIndex == index) ? true : false,
                   ),
                 );
               }

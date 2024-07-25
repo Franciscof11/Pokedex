@@ -8,7 +8,7 @@ class PokedexRepository {
     try {
       final dio = Dio();
 
-      final response = await dio.get('https://pokeapi.co/api/v2/pokemon?limit=10');
+      final response = await dio.get('https://pokeapi.co/api/v2/pokemon?limit=50');
 
       final responseMap = response.data['results'];
 
