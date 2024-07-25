@@ -74,11 +74,11 @@ class PokedexCubit extends Cubit<PokedexState> {
     }
   }
 
-  Future<void> filterByType(int typeId) async {
+  Future<void> filterByType(int typeId, List<Pokemon> pokedex) async {
     try {
       emit(const PokedexState.loading());
 
-      final pokedex = await _repository.getPokedex();
+      /*     final pokedex = await _repository.getPokedex(); */
 
       List<Pokemon> filteredPokedex = pokedex;
       filter(String type) {

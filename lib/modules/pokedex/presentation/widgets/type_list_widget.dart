@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pokedex/config/database/pokedex/pokedex_db.dart';
 import 'package:pokedex/modules/pokedex/presentation/home_feed_page/cubit/pokedex_cubit.dart';
 
 import '../../../../utils/app_colors.dart';
@@ -92,10 +93,16 @@ class TypeListState extends State<TypeList> {
                 );
               } else {
                 return GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     setBrandIndex(index);
 
-                    context.read<PokedexCubit>().filterByType(index);
+                    final pokedexDB = PokedexDB();
+
+                    final pokedexTable = await pokedexDB.getAll();
+
+                    if (pokedexTable.isNotEmpty && context.mounted) {
+                      context.read<PokedexCubit>().filterByType(index, pokedexTable);
+                    }
                   },
                   child: BrandItem(
                     imgAsset: typeList[index]["name"].toString(),
