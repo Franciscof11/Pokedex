@@ -28,7 +28,7 @@ class PokemonListTile extends StatelessWidget {
                     style: GoogleFonts.nunito(
                       color: AppColors.primaryBlue,
                       fontWeight: FontWeight.w700,
-                      fontSize: 20,
+                      fontSize: 16,
                     ),
                   ),
                   const SizedBox(height: 6),
@@ -54,7 +54,7 @@ class PokemonListTile extends StatelessWidget {
                     style: GoogleFonts.nunito(
                       color: AppColors.primaryBlue,
                       fontWeight: FontWeight.w700,
-                      fontSize: 16,
+                      fontSize: 14,
                     ),
                   ),
                 ],

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:pokedex/modules/pokedex/domain/pokemon.dart';
+import 'package:pokedex/modules/pokedex/presentation/pokemon_details_page/pokemon_details_page.dart';
 import 'package:pokedex/utils/app_colors.dart';
 import '../widgets/pokemon_list_tile.dart';
 import '../widgets/search_widget.dart';
@@ -14,6 +17,17 @@ class HomeFeedPage extends StatefulWidget {
 }
 
 class _HomeFeedPageState extends State<HomeFeedPage> {
+  final pokemon = Pokemon(
+    id: 1,
+    name: 'bulbasaur',
+    attack: 1,
+    defense: 2,
+    hp: 4,
+    imageLink: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg',
+    speed: 4,
+    type: 'grama',
+  );
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -21,6 +35,7 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
+          backgroundColor: AppColors.whiteIce,
           leading: const Padding(
             padding: EdgeInsets.only(left: 15),
             child: Icon(
@@ -63,40 +78,66 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
             const SizedBox(height: 15),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Mais procurados",
-                      style: GoogleFonts.nunito(
-                        color: AppColors.primaryBlue,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 22,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        "Mais procurados",
+                        style: GoogleFonts.nunito(
+                          color: AppColors.primaryBlue,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 22,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 15),
                     Expanded(
-                      child: GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 8,
-                          crossAxisSpacing: 8,
-                          childAspectRatio: 3 / 2,
-                        ),
-                        shrinkWrap: true,
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: 20,
-                        itemBuilder: (context, index) => PokemonListTile(
-                          pokemon: Pokemon(
-                            id: 1,
-                            name: 'Teste',
-                            attack: 1,
-                            defense: 2,
-                            hp: 4,
-                            imageLink: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg',
-                            speed: 4,
-                            type: 'grama',
+                      child: RefreshIndicator(
+                        color: AppColors.primaryRed,
+                        onRefresh: () async {
+                          return Future<void>.delayed(const Duration(seconds: 2));
+                        },
+                        child: AnimationLimiter(
+                          child: GridView.builder(
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 8,
+                              crossAxisSpacing: 8,
+                              childAspectRatio: 3 / 2,
+                            ),
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: 20,
+                            itemBuilder: (context, index) => AnimationConfiguration.staggeredList(
+                              position: index,
+                              delay: const Duration(milliseconds: 200),
+                              child: SlideAnimation(
+                                duration: const Duration(milliseconds: 3500),
+                                curve: Curves.fastLinearToSlowEaseIn,
+                                horizontalOffset: 30,
+                                verticalOffset: 300.0,
+                                child: FlipAnimation(
+                                  duration: const Duration(milliseconds: 4000),
+                                  curve: Curves.fastLinearToSlowEaseIn,
+                                  flipAxis: FlipAxis.y,
+                                  child: GestureDetector(
+                                    onTap: () => Navigator.push(
+                                      context,
+                                      PageTransition(
+                                        child: PokemonDetailsPage(pokemon: pokemon),
+                                        type: PageTransitionType.rightToLeft,
+                                      ),
+                                    ),
+                                    child: PokemonListTile(
+                                      pokemon: pokemon,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
