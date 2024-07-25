@@ -24,8 +24,7 @@
    <h2>Preview 📱</h2><br>
 
    <p a>
-   <img src="app_preview/app_preview_1.png" width="300" height="600" alt="App Preview"> 
-   <img src="app_preview/app_preview_2.png" width="300" height="600" alt="App Preview"> 
+    <img src="app_preview/app_preview_2.png" width="300" height="600" alt="App Preview"> 
     <img src="app_preview/app_preview_3.png" width="300" height="600" alt="App Preview"> 
    </p>
 
@@ -38,13 +37,13 @@
 - **bloc** -> Gerenciador de estado.
 - **dio** -> Pacote de rede para efetuar requisições http.
 - **freezed** -> Gerador de código para classes de estados e eventos do bloc.
-- **sqflite** -> Banco de dados SQL utilizado para armazenar dados na memória do aparelho.
+- **sqflite** -> Banco de dados SQL utilizado para realizar o cashe de dados na memória do aparelho.
 - **google_fonts** -> Utilização de fontes nativa do Google.
 - **flutter_launcher_icons** -> Customização e configuração do ícone do applicativo.
 - **flutter_native_splash** -> Criação da Splash Screen nativa do aplicativo.
 - **device_preview** -> Testes em diversos tamanhos de tela, para melhor responsividade para a aplicação.
-- **bloc_test** -> Biblioteca usada para escrever e executar testes unitários quanto ao bloc.
-- **mocktail** -> Biblioteca utilizada para mockar serviços http e de banco de dados para os testes.
+- **percent_indicator** -> Biblioteca de animações.
+- **cached_network_image** -> Biblioteca para mostrar imagens e mantê-las no diretório de cache do aparelho.
 
   
 ---
@@ -53,10 +52,10 @@
 
 ```
 - Clone this repository:
-$ git clone https://github.com/Franciscof11/Car_Expo.git Car_Expo
+$ git clone https://github.com/Franciscof11/Pokedex.git Pokedex
 
 - Enter in directory:
-$ cd Car_Expo
+$ cd Pokedex
 
 - For install dependencies:
 $ flutter pub get
