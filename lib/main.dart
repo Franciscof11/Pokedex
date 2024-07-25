@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokedex/modules/pokedex/data/pokedex_repository.dart';
+import 'package:pokedex/modules/pokedex/data/pokemon_repository.dart';
 import 'modules/pokedex/presentation/welcome_page/welcome_page.dart';
 
 void main() {
@@ -10,13 +13,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pokedex',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(create: (context) => PokedexRepository()),
+        RepositoryProvider(create: (context) => PokemonRepository()),
+      ],
+      child: MaterialApp(
+        title: 'Pokedex',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const WelcomePage(),
       ),
-      home: const WelcomePage(),
     );
   }
 }
