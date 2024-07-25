@@ -8,7 +8,7 @@ import 'modules/pokedex/presentation/welcome_page/welcome_page.dart';
 void main() {
   runApp(
     DevicePreview(
-      enabled: true,
+      enabled: false, // Enable this to test in different resolutions
       builder: (context) => const MyApp(),
     ),
   );
