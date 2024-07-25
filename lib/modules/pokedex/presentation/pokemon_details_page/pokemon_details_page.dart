@@ -19,6 +19,51 @@ class PokemonDetailsPage extends StatefulWidget {
 class PokemonDetailsPageState extends State<PokemonDetailsPage> {
   @override
   Widget build(BuildContext context) {
+    Color selectColor(String type) {
+      switch (type) {
+        case 'water':
+          return Colors.blue;
+        case 'fire':
+          return Colors.orange;
+        case 'grass':
+          return Colors.green;
+        case 'normal':
+          return Colors.grey[800]!;
+        case 'ground':
+          return Colors.brown;
+        case 'bug':
+          return Colors.purple[700]!;
+        case 'electric':
+          return Colors.yellow;
+      }
+
+      return Colors.black;
+    }
+
+    String translateType(String type) {
+      switch (type) {
+        case 'water':
+          return 'Água';
+        case 'fire':
+          return 'Fogo';
+        case 'grass':
+          return 'Grama';
+        case 'normal':
+          return 'Normal';
+        case 'ground':
+          return 'Terra';
+        case 'bug':
+          return 'Inseto';
+        case 'electric':
+          return 'Elétrico';
+
+        case 'fairy':
+          return 'Fada';
+      }
+
+      return type;
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -138,10 +183,10 @@ class PokemonDetailsPageState extends State<PokemonDetailsPage> {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),
-                            color: Colors.blue,
+                            color: selectColor(pokemon.type),
                           ),
                           child: Text(
-                            pokemon.type,
+                            translateType(pokemon.type),
                             style: GoogleFonts.nunito(
                               color: AppColors.primaryBlue,
                               fontWeight: FontWeight.w500,
