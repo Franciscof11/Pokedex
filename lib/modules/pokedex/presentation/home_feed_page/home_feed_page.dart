@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pokedex/modules/pokedex/domain/pokemon.dart';
+import 'package:pokedex/modules/pokedex/presentation/home_feed_page/cubit/pokedex_cubit.dart';
 import 'package:pokedex/modules/pokedex/presentation/pokemon_details_page/pokemon_details_page.dart';
 import 'package:pokedex/utils/app_colors.dart';
+import '../widgets/loader.dart';
 import '../widgets/pokemon_list_tile.dart';
 import '../widgets/search_widget.dart';
 import '../widgets/type_list_widget.dart';
@@ -94,53 +96,53 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
                       ),
                     ),
                     const SizedBox(height: 15),
-                    Expanded(
-                      child: RefreshIndicator(
-                        color: AppColors.primaryRed,
-                        onRefresh: () async {
-                          return Future<void>.delayed(const Duration(seconds: 2));
-                        },
-                        child: AnimationLimiter(
-                          child: GridView.builder(
-                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 8,
-                              crossAxisSpacing: 8,
-                              childAspectRatio: 3 / 2,
-                            ),
-                            shrinkWrap: true,
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: 20,
-                            itemBuilder: (context, index) => AnimationConfiguration.staggeredList(
-                              position: index,
-                              delay: const Duration(milliseconds: 200),
-                              child: SlideAnimation(
-                                duration: const Duration(milliseconds: 3500),
-                                curve: Curves.fastLinearToSlowEaseIn,
-                                horizontalOffset: 30,
-                                verticalOffset: 300.0,
-                                child: FlipAnimation(
-                                  duration: const Duration(milliseconds: 4000),
-                                  curve: Curves.fastLinearToSlowEaseIn,
-                                  flipAxis: FlipAxis.y,
-                                  child: GestureDetector(
-                                    onTap: () => Navigator.push(
-                                      context,
-                                      PageTransition(
-                                        child: PokemonDetailsPage(pokemon: pokemon),
-                                        type: PageTransitionType.rightToLeft,
-                                      ),
-                                    ),
-                                    child: PokemonListTile(
-                                      pokemon: pokemon,
-                                    ),
+                    Center(
+                      child: Loader<PokedexCubit, PokedexState>(
+                        selector: (state) => state.maybeWhen(
+                          orElse: () => false,
+                          loading: () => true,
+                        ),
+                      ),
+                    ),
+                    BlocSelector<PokedexCubit, PokedexState, List<Pokemon>>(
+                      selector: (state) => state.maybeWhen(
+                        data: (cars) => cars,
+                        orElse: () => [],
+                      ),
+                      builder: (context, state) {
+                        final pokedex = state;
+                        return Expanded(
+                          child: RefreshIndicator(
+                            color: AppColors.primaryRed,
+                            onRefresh: () async {
+                              context.read<PokedexCubit>().getPokedex();
+                            },
+                            child: GridView.builder(
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 8,
+                                crossAxisSpacing: 8,
+                                childAspectRatio: 3 / 2,
+                              ),
+                              shrinkWrap: true,
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: pokedex.length,
+                              itemBuilder: (context, index) => GestureDetector(
+                                onTap: () => Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    child: PokemonDetailsPage(pokemon: pokedex[index]),
+                                    type: PageTransitionType.rightToLeft,
                                   ),
+                                ),
+                                child: PokemonListTile(
+                                  pokemon: pokedex[index],
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   ],
                 ),

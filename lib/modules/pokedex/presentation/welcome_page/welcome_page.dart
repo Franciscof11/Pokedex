@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:pokedex/modules/pokedex/data/pokedex_repository.dart';
+import 'package:pokedex/modules/pokedex/presentation/home_feed_page/cubit/pokedex_cubit.dart';
 import 'package:pokedex/modules/pokedex/presentation/home_feed_page/home_feed_page.dart';
 import 'package:pokedex/utils/app_colors.dart';
 
@@ -77,7 +80,10 @@ class _WelcomePageState extends State<WelcomePage> {
                 Navigator.push(
                   context,
                   PageTransition(
-                    child: const HomeFeedPage(),
+                    child: BlocProvider(
+                      create: (context) => PokedexCubit(repository: context.read<PokedexRepository>())..getPokedex(),
+                      child: const HomeFeedPage(),
+                    ),
                     type: PageTransitionType.rightToLeft,
                   ),
                 );
