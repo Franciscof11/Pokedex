@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/modules/pokedex/data/pokedex_repository.dart';
@@ -5,7 +6,12 @@ import 'package:pokedex/modules/pokedex/data/pokemon_repository.dart';
 import 'modules/pokedex/presentation/welcome_page/welcome_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+      enabled: true,
+      builder: (context) => const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -20,10 +26,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Pokedex',
+        builder: DevicePreview.appBuilder,
+        locale: DevicePreview.locale(context),
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
         home: const WelcomePage(),
       ),
     );
