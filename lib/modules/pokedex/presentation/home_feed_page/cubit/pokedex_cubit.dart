@@ -1,7 +1,10 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pokedex/config/database/pokedex/pokedex_db.dart';
 import 'package:pokedex/modules/pokedex/data/pokedex_repository.dart';
 
 import '../../../domain/pokemon.dart';
@@ -21,9 +24,29 @@ class PokedexCubit extends Cubit<PokedexState> {
     try {
       emit(const PokedexState.loading());
 
-      final pokedex = await _repository.getPokedex();
+      final pokedexDB = PokedexDB();
 
-      emit(PokedexState.data(pokedex: pokedex));
+      final pokedexTable = await pokedexDB.getAll();
+
+      if (pokedexTable.isEmpty) {
+        final pokedex = await _repository.getPokedex();
+
+        pokedexDB.create(pokedex: pokedex);
+
+        emit(PokedexState.data(pokedex: pokedex));
+
+        debugPrint('## FROM HTTP ');
+        for (var pokemon in pokedex) {
+          debugPrint(pokemon.toString());
+        }
+      } else if (pokedexTable.isNotEmpty) {
+        final pokedex = await pokedexDB.getAll();
+
+        emit(PokedexState.data(pokedex: pokedex));
+
+        debugPrint('## FROM DATABASE ');
+        debugPrint(pokedex.toString());
+      }
     } catch (e) {
       log(
         'Error!',

@@ -54,6 +54,19 @@ class Pokemon {
     );
   }
 
+  factory Pokemon.fromDatabase(Map<String, dynamic> map) {
+    return Pokemon(
+      id: map['id']?.toInt() ?? 0,
+      name: map['name'] ?? '',
+      type: map['type'] ?? '',
+      imageLink: map['imageLink'] ?? '',
+      hp: map['hp'].toInt() ?? 0,
+      attack: map['attack'].toInt() ?? 0,
+      defense: map['defense'].toInt() ?? 0,
+      speed: map['speed'].toInt() ?? 0,
+    );
+  }
+
   factory Pokemon.empty() {
     return Pokemon(
       id: 0,
