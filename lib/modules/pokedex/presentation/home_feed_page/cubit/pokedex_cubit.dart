@@ -56,11 +56,9 @@ class PokedexCubit extends Cubit<PokedexState> {
     }
   }
 
-  Future<void> searchPokemon(String pokemonName) async {
+  Future<void> searchPokemon(String pokemonName, List<Pokemon> pokedex) async {
     try {
       emit(const PokedexState.loading());
-
-      final pokedex = await _repository.getPokedex();
 
       final filteredPokemon = pokedex.where((pokemon) => pokemon.name.toLowerCase().contains(pokemonName.toLowerCase())).toList();
 

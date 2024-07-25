@@ -52,7 +52,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                const SearchField(),
+                SearchField(),
               ],
             ),
           ),

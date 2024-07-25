@@ -85,7 +85,7 @@ class TypeListState extends State<TypeList> {
 
                     context.read<PokedexCubit>().getPokedex();
                   },
-                  child: BrandItem(
+                  child: TypeItem(
                     imgAsset: 'Todos',
                     index: 0,
                     isSelected: (_typeIndex == index) ? true : false,
@@ -104,7 +104,7 @@ class TypeListState extends State<TypeList> {
                       context.read<PokedexCubit>().filterByType(index, pokedexTable);
                     }
                   },
-                  child: BrandItem(
+                  child: TypeItem(
                     imgAsset: typeList[index]["name"].toString(),
                     index: index,
                     isSelected: (_typeIndex == index) ? true : false,
@@ -119,12 +119,12 @@ class TypeListState extends State<TypeList> {
   }
 }
 
-class BrandItem extends StatelessWidget {
+class TypeItem extends StatelessWidget {
   final String imgAsset;
   final int index;
   final bool isSelected;
 
-  const BrandItem({
+  const TypeItem({
     super.key,
     required this.imgAsset,
     required this.index,

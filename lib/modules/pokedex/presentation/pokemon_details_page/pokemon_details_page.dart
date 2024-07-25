@@ -182,7 +182,7 @@ class PokemonDetailsPageState extends State<PokemonDetailsPage> {
                   lineWidth: 14,
                   animation: true,
                   animationDuration: 2000,
-                  percent: pokemon.attack.toDouble() / 100,
+                  percent: pokemon.attack.toDouble() >= 100 ? pokemon.attack.toDouble() / 200 : pokemon.attack.toDouble() / 100,
                   center: Text(
                     pokemon.speed.toString(),
                     style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
