@@ -82,8 +82,7 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
             ],
           ),
           backgroundColor: AppColors.whiteIce,
-          body: SafeArea(
-              child: Column(
+          body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 15),
@@ -91,9 +90,9 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
                 padding: EdgeInsets.symmetric(horizontal: 25),
                 child: SearchWidget(),
               ),
-              const SizedBox(height: 25),
-              const TypeList(),
               const SizedBox(height: 15),
+              const TypeList(),
+              const SizedBox(height: 8),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -138,8 +137,8 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
                                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
                                   mainAxisSpacing: 8,
-                                  crossAxisSpacing: 8,
-                                  childAspectRatio: 3 / 2,
+                                  crossAxisSpacing: 2,
+                                  childAspectRatio: 1.25,
                                 ),
                                 shrinkWrap: true,
                                 physics: const BouncingScrollPhysics(),
@@ -169,7 +168,7 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
                 ),
               ),
             ],
-          )),
+          ),
           bottomNavigationBar: AnimatedOpacity(
             opacity: _isVisible ? 1.0 : 0.0,
             duration: const Duration(milliseconds: 300),
