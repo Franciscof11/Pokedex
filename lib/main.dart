@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/modules/pokedex/data/pokedex_repository.dart';
 import 'package:pokedex/modules/pokedex/data/pokemon_repository.dart';
+import 'package:pokedex/modules/pokedex/presentation/splash_screen/splash_screen.dart';
 import 'modules/pokedex/presentation/welcome_page/welcome_page.dart';
 
 void main() {
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         builder: DevicePreview.appBuilder,
         locale: DevicePreview.locale(context),
         debugShowCheckedModeBanner: false,
-        home: const WelcomePage(),
+        home: const SplashScreen(),
       ),
     );
   }
