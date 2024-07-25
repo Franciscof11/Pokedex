@@ -1,6 +1,6 @@
-<h2 align="center">Car Expo<h2>
+<h2 align="center">Pokedex<h2>
 <p align="center">
-    <img src="https://i.imgur.com/UxXe6Od.png" width="350" height="350" alt="App Banner" />
+    <img src="https://i.imgur.com/IWemIGb.png" width="350" height="350" alt="App Banner" />
 </p>
 
    <h2>Topics 📋</h2>
@@ -16,7 +16,7 @@
    <h2>About 📖</h2>
    
    <p>
-    O projeto consiste em um sistema de exposição de carros para venda. Nele você pode acessar a lista de carros disponíveis para venda, e fazer uma solicitação de interesse á compra, que será armazenada e enviada diretamente para os servidores de venda! No arquivo "Doc.md" na pasta raiz do projeto, está toda a documentação de desenvolvimento e arquitetura do aplicativo.
+    O projeto simula uma Pokédex onde você pode listar pokémons, ver detalhes completos de cada um, como características, habilidades e estatísticas. Com uma interface intuitiva, o aplicativo oferece uma experiência imersiva, incluindo busca por tipos específicos de cada pokémon, junto de um sistema de cache para respostas http, oque torna o app mais rápido e fluido. No arquivo "Doc.md" na pasta raiz do projeto, está toda a documentação de desenvolvimento e arquitetura do aplicativo.
    </p>
 
 ---
