@@ -26,26 +26,32 @@ class TypeListState extends State<TypeList> {
     {
       "name": "Água",
       "id": 1,
+      "color": "blue",
     },
     {
       "name": "Fogo",
       "id": 2,
+      "color": "orange",
     },
     {
       "name": "Grama",
       "id": 3,
+      "color": "green",
     },
     {
       "name": "Normal",
       "id": 4,
+      "color": "grey",
     },
     {
       "name": "Terra",
       "id": 5,
+      "color": "brown",
     },
     {
       "name": "Inseto",
       "id": 6,
+      "color": "purple",
     },
   ];
 
@@ -57,6 +63,25 @@ class TypeListState extends State<TypeList> {
 
   @override
   Widget build(BuildContext context) {
+    Color selectColor(String colorName) {
+      switch (colorName) {
+        case 'blue':
+          return Colors.blue;
+        case 'orange':
+          return Colors.orange;
+        case 'green':
+          return Colors.green;
+        case 'grey':
+          return Colors.grey[800]!;
+        case 'brown':
+          return Colors.brown;
+        case 'purple':
+          return Colors.purple[700]!;
+      }
+
+      return Colors.transparent;
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -89,6 +114,7 @@ class TypeListState extends State<TypeList> {
                     imgAsset: 'Todos',
                     index: 0,
                     isSelected: (_typeIndex == index) ? true : false,
+                    color: selectColor(typeList[index]["color"].toString()),
                   ),
                 );
               } else {
@@ -108,6 +134,7 @@ class TypeListState extends State<TypeList> {
                     imgAsset: typeList[index]["name"].toString(),
                     index: index,
                     isSelected: (_typeIndex == index) ? true : false,
+                    color: selectColor(typeList[index]["color"].toString()),
                   ),
                 );
               }
@@ -123,12 +150,14 @@ class TypeItem extends StatelessWidget {
   final String imgAsset;
   final int index;
   final bool isSelected;
+  final Color color;
 
   const TypeItem({
     super.key,
     required this.imgAsset,
     required this.index,
     required this.isSelected,
+    required this.color,
   });
 
   @override
@@ -140,10 +169,10 @@ class TypeItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: (isSelected)
-            ? Colors.blue
+            ? AppColors.primaryBlue
             : (index == 0)
                 ? Colors.black12
-                : Colors.white,
+                : color,
         boxShadow: const [
           BoxShadow(
             color: Colors.black12,
@@ -158,7 +187,7 @@ class TypeItem extends StatelessWidget {
                 "Todos",
                 style: GoogleFonts.montserrat(
                   fontSize: 16,
-                  color: Colors.black,
+                  color: Colors.white,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -167,7 +196,7 @@ class TypeItem extends StatelessWidget {
               imgAsset,
               style: GoogleFonts.montserrat(
                 fontSize: 16,
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.w500,
               ),
             ),
