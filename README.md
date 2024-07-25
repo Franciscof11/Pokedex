@@ -24,8 +24,9 @@
    <h2>Preview 📱</h2><br>
 
    <p a>
-   <img src="app_preview/preview_1.png.jpeg" width="300" height="600" alt="App Preview"> 
-   <img src="app_preview/preview_2.png.jpeg" width="300" height="600" alt="App Preview"> 
+   <img src="app_preview/app_preview_1.png" width="300" height="600" alt="App Preview"> 
+   <img src="app_preview/app_preview_2.png" width="300" height="600" alt="App Preview"> 
+    <img src="app_preview/app_preview_3.png" width="300" height="600" alt="App Preview"> 
    </p>
 
 ---
