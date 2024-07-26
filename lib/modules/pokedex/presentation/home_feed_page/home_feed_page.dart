@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
@@ -172,9 +171,8 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
                 label: 'Minha conta',
               ),
             ],
-
-            selectedItemColor: Colors.blue, // Change this to match your design
-            unselectedItemColor: Colors.grey, // Change this to match your design
+            selectedItemColor: Colors.blue,
+            unselectedItemColor: Colors.grey,
           ),
         ));
   }

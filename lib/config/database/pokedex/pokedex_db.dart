@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:pokedex/modules/pokedex/domain/pokemon.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -42,15 +41,5 @@ class PokedexDB {
       '''SELECT * from $tableName''',
     );
     return pokedex.map((pokemon) => Pokemon.fromDatabase(pokemon)).toList();
-  }
-
-  Future<void> printAll() async {
-    final database = await DatabaseService().database;
-    final pokedex = await database.rawQuery(
-      '''SELECT * from $tableName''',
-    );
-    for (var pokemon in pokedex) {
-      debugPrint(pokemon.toString());
-    }
   }
 }
