@@ -172,9 +172,8 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
                 label: 'Minha conta',
               ),
             ],
-
-            selectedItemColor: Colors.blue, // Change this to match your design
-            unselectedItemColor: Colors.grey, // Change this to match your design
+            selectedItemColor: Colors.blue,
+            unselectedItemColor: Colors.grey,
           ),
         ));
   }
