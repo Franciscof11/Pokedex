@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:pokedex/modules/pokedex/presentation/pokemon_details_page/cubit/pokemon_cubit.dart';
 import 'package:pokedex/utils/app_colors.dart';
+
 import '../../../../utils/cached_network_svg.dart';
 import '../../domain/pokemon.dart';
 import '../widgets/pokemon_detail_stats_bar.dart';
@@ -128,7 +129,10 @@ class PokemonDetailsPageState extends State<PokemonDetailsPage> {
                     child: SizedBox(
                       width: 280,
                       height: 280,
-                      child: CachedNetworkSvg(urlImage: pokemon.imageLink),
+                      child: Hero(
+                        tag: pokemon.id,
+                        child: CachedNetworkSvg(urlImage: pokemon.imageLink),
+                      ),
                     ),
                   ),
                 ],

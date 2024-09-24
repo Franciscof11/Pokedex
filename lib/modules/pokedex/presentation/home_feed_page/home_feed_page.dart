@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
@@ -8,6 +7,7 @@ import 'package:pokedex/modules/pokedex/presentation/home_feed_page/cubit/pokede
 import 'package:pokedex/modules/pokedex/presentation/pokemon_details_page/cubit/pokemon_cubit.dart';
 import 'package:pokedex/modules/pokedex/presentation/pokemon_details_page/pokemon_details_page.dart';
 import 'package:pokedex/utils/app_colors.dart';
+
 import '../widgets/loader.dart';
 import '../widgets/pokemon_list_tile.dart';
 import '../widgets/search_widget.dart';

@@ -121,7 +121,10 @@ class PokemonListTile extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 10),
-                  child: CachedNetworkSvg(urlImage: pokemon.imageLink),
+                  child: Hero(
+                    tag: pokemon.id,
+                    child: CachedNetworkSvg(urlImage: pokemon.imageLink),
+                  ),
                 ),
               ],
             ),
